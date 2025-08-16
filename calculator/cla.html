@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>calculator</title>
+    <link rel="stylesheet" href="calcu.css">
+</head>
+<body>
+    <table border="1">
+        <tr>
+          <td colspan="4">
+                <input type="text" id="inputBox" value="0">
+          </td>  
+        </tr>
+
+        <tr>
+            <td class="allClear">AC</td>
+            <td data-operator="negative" class="signOperator negative">+/-</td>
+            <td data-operator="%" class="signOperator percentage">%</td>
+            <td class="operator">/</td>
+        </tr>
+
+        <tr>
+            <td class="digit">7</td>
+            <td class="digit">8</td>
+            <td class="digit">9</td>
+            <td class="operator">x</td>
+        </tr>
+
+        <tr>
+            <td class="digit">4</td>
+            <td class="digit">5</td>
+            <td class="digit">6</td>
+            <td class="operator">-</td>
+        </tr>
+
+        <tr>
+            <td class="digit">1</td>
+            <td class="digit">2</td>
+            <td class="digit">3</td>
+            <td class="operator" data-operator="+">+</td>
+        </tr>
+
+        <tr>
+            <td colspan="2" class="digit zero">0</td>
+            <td data-operator="," class="signOperator">,</td>
+            <td class="equalBtn">=</td>
+        </tr>
+
+    </table>
+<script src="calcu.js"></script>
+</body>
+</html>

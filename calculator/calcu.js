@@ -95,10 +95,10 @@ function operatorSigns(currentSign) {
             inputBox.value = inputBox.value / 100;
             break;
         case '.':
-            inputBox.value = inputBox.value + '.';
-            console.log(typeof(inputBox.value));
-            defaultE(currentSign);
-            break;
+            if(inputBox.value.includes('.')) {
+                inputBox.value += '.'
+            };
+            return;
         case '+/-': 
             inputBox.value = inputBox.value * -1;
             break;
@@ -114,7 +114,5 @@ signOperators.forEach((sign) => {
     })
 })
 
-function defaultE(sign) {
-    if(sign.contains('.')) {
-       sign.textContent = '';
-    }
+
+

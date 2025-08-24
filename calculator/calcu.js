@@ -1,4 +1,5 @@
 // dom elements
+const inputBox = document.querySelector('#inputBox');
 let isInputValueZero = true;
 let allClear = document.querySelector('.allClear');
 let operators = document.querySelectorAll('.operator');
@@ -14,13 +15,10 @@ function digitPressed(button) {
     
     if(isInputValueZero) {
         inputBox.value = button;
-       // signOptor(button);
         isInputValueZero = false;
     }else {
         let currentValue = inputBox.value;
         inputBox.value = currentValue + button;
-       // signOptor(inputBox.value);
-        console.log(currentValue);
     }
 
 }
@@ -28,11 +26,9 @@ function digitPressed(button) {
 // operator clicked
 function digitDisplay() {
     let digits = document.querySelectorAll('.digit');
-    console.log(digits);
     digits.forEach((digit) => {
         digit.addEventListener('click', () => {
             digitPressed(digit.textContent);
-            
         });
     })
 }
@@ -43,14 +39,13 @@ digitDisplay();
 function allClearButt() {
     inputBox.value = 0;
     isInputValueZero = true;
-
 };
 
 allClear.addEventListener('click', allClearButt);
 
 function operatorPressed(operator) {
     currentOperator = operator;
-    value1 = parseInt(inputBox.value);
+    value1 = parseFloat(inputBox.value);
     isInputValueZero = true;
 }
 
@@ -62,7 +57,7 @@ operators.forEach((sign) => {
 
 // equal button
 function equalBtnPressed() {
-    let value2 = parseInt(inputBox.value);
+    let value2 = parseFloat(inputBox.value);
     let finalTotal;
 
     switch(currentOperator) {
@@ -81,7 +76,10 @@ function equalBtnPressed() {
         
     }
     inputBox.value = finalTotal;
-    console.log(finalTotal);
+    if(isNaN(finalTotal)) {
+        alert('enter valid number');
+        inputBox.value = 0;
+    };
     
     value1 = 0;
     isInputValueZero = true;
@@ -91,36 +89,32 @@ equalBtn.addEventListener('click', equalBtnPressed);
 
 // sign operator
 
-/*function signOptor(value) {
-    let percent = document.querySelector('.percentage');
-    let percentSum;
+function operatorSigns(currentSign) {
+    switch(currentSign) {
+        case '%':
+            inputBox.value = inputBox.value / 100;
+            break;
+        case '.':
+            inputBox.value = inputBox.value + '.';
+            console.log(typeof(inputBox.value));
+            defaultE(currentSign);
+            break;
+        case '+/-': 
+            inputBox.value = inputBox.value * -1;
+            break;
+    }   
 
-    percent.addEventListener('click', () => {
-        console.log(inputBox.value);
-        percentSum = parseInt(value) / 100; 
-        console.log('clicked');
-        console.log(percentSum);  
-    });
-}*/
-
-function signOptor(sign) {
-    const inputBox = document.querySelector('#inputBox');
-    const currentInpu = parseInt(inputBox.value);
-
-    if(sign === '%') {
-        inputBox.value = currentInpu / 100;
-    }else if(sign === ',') {
-        inputBox.value = parseFloat(currentInpu + ',');
-    }else if(sign === '+/-') {
-        inputBox.value = '-' + currentInpu;
-    }else{
-        inputBox.value = currentInpu;
-    }
-
-};
+    inputBox.value = parseFloat(inputBox.value);
+    isInputValueZero = true;
+}
 
 signOperators.forEach((sign) => {
     sign.addEventListener('click', () => {
-        signOptor(sign.textContent);
-    });
+        operatorSigns(sign.textContent);
+    })
 })
+
+function defaultE(sign) {
+    if(sign.contains('.')) {
+       sign.textContent = '';
+    }
